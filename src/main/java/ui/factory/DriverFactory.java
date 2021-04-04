@@ -18,29 +18,29 @@ public class DriverFactory {
 	private static WebDriver driver;
 
 	private static final Supplier<WebDriver> chromeSupplier = () -> {	
-		
-		
-		DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+				
+		ChromeOptions chromeOptions = new ChromeOptions();
+		DesiredCapabilities cap = DesiredCapabilities.chrome();
+
 		System.setProperty("webdriver.chrome.driver","/Users/a.vitthal.gulavani/Desktop/Personal_Data/personal_workspace/chromedriver-2");
 		String host = "localhost";
 		
 			if (System.getProperty("HUB_HOST") != null) {
+				System.out.println("In Remote driver class");
 				host = System.getProperty("HUB_HOST");
+				String completeURL = "http://" + host + ":4444/wd/hub";
+				
+				try {
+					driver = new RemoteWebDriver(new URL(completeURL), cap);
+				} catch (MalformedURLException e) {
+				    
+					e.printStackTrace();
+				}
+				return driver = new ChromeDriver(chromeOptions);
 			}
 			else
 				return new ChromeDriver();
-			
-			String completeURL = "http://" + host + ":4444/wd/hub";
-			
-			try {
-				driver = new RemoteWebDriver(new URL(completeURL), capabilities);
-			} catch (MalformedURLException e) {
-			    
-				e.printStackTrace();
-			}
-		
-			return driver;
-
+	
 	};
 	
 	private static final Supplier<WebDriver> firefoxSupplier = () -> {

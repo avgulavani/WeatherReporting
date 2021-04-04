@@ -1,9 +1,9 @@
 Request method:	GET
-Request URI:	http://api.openweathermap.org/data/2.5/weather?appid=7fe67bf08c80ded756e598d6f8fedaea&q=Mumbai&units=imperial
+Request URI:	http://api.openweathermap.org/data/2.5/weather?appid=7fe67bf08c80ded756e598d6f8fedaea&q=Pune&units=imperial
 Proxy:			<none>
 Request params:	<none>
 Query params:	appid=7fe67bf08c80ded756e598d6f8fedaea
-				q=Mumbai
+				q=Pune
 				units=imperial
 Form params:	<none>
 Path params:	<none>
@@ -14,55 +14,56 @@ Multiparts:		<none>
 Body:			<none>
 HTTP/1.1 200 OK
 Server: openresty
-Date: Sun, 04 Apr 2021 12:47:40 GMT
+Date: Sun, 04 Apr 2021 13:39:06 GMT
 Content-Type: application/json; charset=utf-8
-Content-Length: 455
+Content-Length: 491
 Connection: keep-alive
-X-Cache-Key: /data/2.5/weather?q=mumbai&units=imperial
+X-Cache-Key: /data/2.5/weather?q=pune&units=imperial
 Access-Control-Allow-Origin: *
 Access-Control-Allow-Credentials: true
 Access-Control-Allow-Methods: GET, POST
 
 {
     "coord": {
-        "lon": 72.8479,
-        "lat": 19.0144
+        "lon": 73.8553,
+        "lat": 18.5196
     },
     "weather": [
         {
-            "id": 711,
-            "main": "Smoke",
-            "description": "smoke",
-            "icon": "50d"
+            "id": 800,
+            "main": "Clear",
+            "description": "clear sky",
+            "icon": "01n"
         }
     ],
     "base": "stations",
     "main": {
-        "temp": 85.1,
-        "feels_like": 91.09,
-        "temp_min": 84.2,
-        "temp_max": 86,
-        "pressure": 1008,
-        "humidity": 65
+        "temp": 87.22,
+        "feels_like": 85.82,
+        "temp_min": 87.22,
+        "temp_max": 87.22,
+        "pressure": 1009,
+        "humidity": 35,
+        "sea_level": 1009,
+        "grnd_level": 949
     },
-    "visibility": 5000,
+    "visibility": 10000,
     "wind": {
-        "speed": 12.66,
-        "deg": 290
+        "speed": 10.4,
+        "deg": 273,
+        "gust": 16.22
     },
     "clouds": {
-        "all": 6
+        "all": 10
     },
-    "dt": 1617540079,
+    "dt": 1617543312,
     "sys": {
-        "type": 1,
-        "id": 9068,
         "country": "IN",
-        "sunrise": 1617498001,
-        "sunset": 1617542570
+        "sunrise": 1617497774,
+        "sunset": 1617542315
     },
     "timezone": 19800,
-    "id": 1275339,
-    "name": "Mumbai",
+    "id": 1259229,
+    "name": "Pune",
     "cod": 200
 }
