@@ -34,7 +34,7 @@ public class SendRequest extends RestUtil {
 		String jsonString = response.asString();
 	
 		JsonPath js = new JsonPath(jsonString);
-		Object temp = (Object)js.get("main.temp_min");
+		Object temp = (Object)js.get("main.temp_max");
 		
 		Assert.assertEquals(response.getStatusCode(),EXPECTED_RESPONSE_CODE);
 		Assert.assertEquals(jsonString.contains(cityname), true);
@@ -54,8 +54,8 @@ public class SendRequest extends RestUtil {
 		ProjectUtil.toJsonMap("Api",apidatamap);
 	}
 		
-		public void writeTextData(String filename) {
+		public void writeTextData(String method) {
 			
-			ProjectUtil.toFile(filename,apidatamap);
+			ProjectUtil.toFile(method,apidatamap);
 		}
 }

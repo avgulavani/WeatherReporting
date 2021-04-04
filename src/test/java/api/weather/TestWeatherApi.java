@@ -1,7 +1,5 @@
 package api.weather;
 
-import java.io.File;
-
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -9,10 +7,8 @@ import org.testng.annotations.Test;
 public class TestWeatherApi extends SendRequest {
 	
 	SendRequest sendrequest=new SendRequest();
-	private static String textfilepath = System.getProperty("user.dir") + File.separator + "outdir" + File.separator
-			+ "apidata.txt";
 	
-		@Test(dataProvider = "getData")
+		@Test(dataProvider = "getData",groups={"generatedata"})
 		public void testCityTemprature(String name,String unit) {
 			sendrequest.getTempratureAPI(name, unit);
 	
@@ -23,16 +19,17 @@ public class TestWeatherApi extends SendRequest {
 			
 			return new Object[][]{
 				
-				{"Bhopal","imperial"},
-				{"Mumbai","imperial"},
-				{"Delhi","imperial"},
-				{"Srinagar","imperial"}
+			//	{"Bhopal","imperial"}
+			//	{"Mumbai","imperial"},
+			//	{"Delhi","imperial"},
+			//	{"Srinagar","imperial"},
+				{"Pune","imperial"}
 			};
 		}
 		
 		@AfterTest
 		public void writeFile() {	
-			sendrequest.writeTextData(textfilepath);
+			sendrequest.writeTextData("api");
 		}
 
 }

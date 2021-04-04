@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Testing Weather Api">
+    <test name="Regression">
+         <classes>
+             <class name="api.weather.TestWeatherApi"/>
+          </classes>
+     </test> <!-- Test -->
+</suite> <!-- Suite -->

@@ -58,7 +58,7 @@ public class VerifyWeather extends PageAbstract {
 			Assert.assertFalse(true, "Temprature is not displayed on canvas map");
 		}
 		tempF=ProjectUtil.formatValue(tempF, 2);
-		System.out.println("temprature from ui" + tempF);
+		System.out.println("temprature from ui " + tempF);
 		convertedFloattemp=ProjectUtil.convertToFloat(tempF);
 		uidatamap.put(name, convertedFloattemp);
 		return convertedFloattemp;
@@ -84,9 +84,9 @@ public class VerifyWeather extends PageAbstract {
 		return this.wait.until((d) -> this.map_canvas.isDisplayed());
 	}
 	
-	public void writeTextData(String filename) {
+	public void writeTextData(String method) {
 		
-		ProjectUtil.toFile(filename,uidatamap);
+		ProjectUtil.toFile(method,uidatamap);
 	}
 
 }

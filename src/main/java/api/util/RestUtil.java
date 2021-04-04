@@ -28,10 +28,9 @@ public class RestUtil {
 	public static RequestSpecification requestSpecification() throws IOException {
 		if (req == null) {
 
-			String outputfilepath = System.getProperty("user.dir") + File.separator + "outdir" + File.separator
-					+ "logging.txt";
+			String loggingfilepath = System.getProperty("user.dir") + File.separator +"logging.txt";
 
-			PrintStream log = new PrintStream(new FileOutputStream(outputfilepath));
+			PrintStream log = new PrintStream(new FileOutputStream(loggingfilepath));
 
 			req = new RequestSpecBuilder().setBaseUri(getGlobalValue("baseUrl"))
 					.addQueryParam("appid", getGlobalValue("appid")).addFilter(RequestLoggingFilter.logRequestTo(log))
@@ -64,7 +63,7 @@ public class RestUtil {
 	@SuppressWarnings("unchecked")
 	public static void toJsonMap(String method, Map<String, Float> map) {
 
-		String jsonfilepath = System.getProperty("user.dir") + File.separator + "outdir" + File.separator + "jsonmap.json";
+		String jsonfilepath = System.getProperty("user.dir") + File.separator + "jsonmap.json";
 
 		JSONObject weatherDetails = new JSONObject();
 		JSONObject weatherObject = new JSONObject();

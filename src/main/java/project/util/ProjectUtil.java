@@ -2,7 +2,6 @@ package project.util;
 
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -15,17 +14,21 @@ import java.util.Map.Entry;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.testng.Assert;
 
 public class ProjectUtil {
 
 	static JSONArray weatherList = new JSONArray();
-	private static String jsonfilepath = System.getProperty("user.dir") + File.separator + "outdir" + File.separator+ "apidata.json";
+	private static String jsonfilepath = System.getProperty("user.dir") + File.separator  +  "apidata.json";
+	private static String apitextfilepath = System.getProperty("user.dir") + File.separator +  "apidata.txt";
+	private static String uitextfilepath = System.getProperty("user.dir") + File.separator   + "uidata.txt";
 	static float temprature;
 	private final static int BEGIN_INDEX = 0;
 	private static final float TEMPRATURE_THRSHOLD = 1;
+	private static  String filename;
+	
 
 	@SuppressWarnings("unchecked")
 	public static void toJsonMap(String method, Map<String, Float> map) {
@@ -65,22 +68,30 @@ public class ProjectUtil {
 
 	public static List<String> readTextFile(String filename) {
 		
+
 		Path path = Paths.get(filename);
 		List<String> ls = null;
-		
-			try {
-					if(Files.size(path)>0)
-					ls = Files.readAllLines(path);
-					else  throw new FileNotFoundException("file not found" +filename);
-		} catch (FileNotFoundException e) {
-			System.out.println(e.getMessage());
-		}
-
-			return ls;
+	
+					try {
+						ls = Files.readAllLines(path);
+						if(ls.isEmpty())
+							throw new Exception ("File is empty");
+					} catch (Exception ex) {
+						Assert.assertFalse(true, "Probabley file has not data");
+					}
+					return ls;
+						
 	}
 
-	public static void toFile(String filename, Map<String, Float> weathermap) {
+	public static void toFile(String method, Map<String, Float> weathermap) {
+		
+		if(method=="api")
+			filename=apitextfilepath;
+		else
+			filename=uitextfilepath;
+			
 		File file = new File(filename);
+		
 
 		BufferedWriter bf = null;
 
@@ -131,19 +142,19 @@ public class ProjectUtil {
 	}
 	
 	public static boolean checkWeatherData(Map<Object, Object> m1, Map<Object, Object> m2) {
-		boolean result = true;
+		boolean result = false;
 		for (Object key : m1.keySet()) {
 			if (m2.containsKey(key)) {
 
 				float difference = ProjectUtil.compareFloatValue(m1.get(key), m2.get(key));
-
-				if (difference <= TEMPRATURE_THRSHOLD)
-					return result = true;
+	
+				if (Math.abs(difference) <= TEMPRATURE_THRSHOLD)
+					result = true;
 				else
-					return result = false;
-
+					return false;
 			}
 		}
+		System.out.println("** result from util**" + result);
 		return result;
 	}
 }

@@ -1,6 +1,4 @@
 package ui.weather;
-import java.io.File;
-
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -23,8 +21,7 @@ public class TestWeatherUI {
 	private WebDriver driver;
 	private MainPage mainPage;
 	private WeatherMainPage weathermainpage;
-	private static String uitextfilepath = System.getProperty("user.dir") + File.separator + "outdir" + File.separator
-			+ "uidata.txt";
+	
 	
 
 	@BeforeMethod
@@ -39,7 +36,7 @@ public class TestWeatherUI {
 		
 	}
 
-	@Test(dataProvider = "getData")
+	@Test(dataProvider = "getData",groups={"generatedata"})
 	public void testWeather(String name) {
 		
 		this.mainPage.launchSite();
@@ -59,9 +56,10 @@ public class TestWeatherUI {
 	public Object[] getData(){
 		
 		return new Object[] {	
-				"Pune",
-				"Mumbai",
-				"Srinagar"
+				
+				//"Mumbai",
+				//"Srinagar",
+				"Pune"
 		};
 	}
 	
@@ -73,6 +71,6 @@ public class TestWeatherUI {
 	
 	@AfterTest	
 	public void writeData() {
-		this.weathermainpage.getVerifyWeather().writeTextData(uitextfilepath);
+		this.weathermainpage.getVerifyWeather().writeTextData("web");
 	}
 }
