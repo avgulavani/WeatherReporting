@@ -1,13 +1,11 @@
 package ui.weather;
+import java.io.File;
 
-import org.testng.annotations.Test;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-import org.testng.annotations.BeforeMethod;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Optional;
@@ -25,6 +23,8 @@ public class TestWeatherUI {
 	private WebDriver driver;
 	private MainPage mainPage;
 	private WeatherMainPage weathermainpage;
+	private static String uitextfilepath = System.getProperty("user.dir") + File.separator + "outdir" + File.separator
+			+ "uidata.txt";
 	
 
 	@BeforeMethod
@@ -48,25 +48,31 @@ public class TestWeatherUI {
 		this.weathermainpage.getSearchWideget().enterCity(name);
 		this.weathermainpage.getSearchWideget().selectCity(name);
 		this.weathermainpage.getVerifyWeather().verifyCityDisplayedOnMap(name);
-		this.weathermainpage.getVerifyWeather().getCitytempratureF(name);
-		System.out.println("** Fah termparture ** " + this.weathermainpage.getVerifyWeather().getCitytempratureF(name));
-		
+		this.weathermainpage.getVerifyWeather().getCitytempratureF(name);	
+		Assert.assertNotNull(this.weathermainpage.getVerifyWeather().getCitytempratureF(name));
 		this.weathermainpage.getVerifyWeather().verifyTempratureBoard(name);
 	}
 	
+	
+
 	@DataProvider
 	public Object[] getData(){
 		
-		return new Object[] {
-		
+		return new Object[] {	
 				"Pune",
-				"Mumbai"
+				"Mumbai",
+				"Srinagar"
 		};
 	}
 	
 	@AfterMethod
 	public void quitDriver() {
+		
 		this.driver.quit();
 	}
-
+	
+	@AfterTest	
+	public void writeData() {
+		this.weathermainpage.getVerifyWeather().writeTextData(uitextfilepath);
+	}
 }

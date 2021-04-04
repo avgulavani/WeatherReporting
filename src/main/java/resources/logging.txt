@@ -1,0 +1,138 @@
+Request method:	GET
+Request URI:	http://api.openweathermap.org/data/2.5/weather?appid=7fe67bf08c80ded756e598d6f8fedaea&q=Pune&units=imperial
+Proxy:			<none>
+Request params:	<none>
+Query params:	appid=7fe67bf08c80ded756e598d6f8fedaea
+				q=Pune
+				units=imperial
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>
+HTTP/1.1 200 OK
+Server: openresty
+Date: Sat, 03 Apr 2021 05:23:57 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 489
+Connection: keep-alive
+X-Cache-Key: /data/2.5/weather?q=pune&units=imperial
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Credentials: true
+Access-Control-Allow-Methods: GET, POST
+
+{
+    "coord": {
+        "lon": 73.8553,
+        "lat": 18.5196
+    },
+    "weather": [
+        {
+            "id": 800,
+            "main": "Clear",
+            "description": "clear sky",
+            "icon": "01d"
+        }
+    ],
+    "base": "stations",
+    "main": {
+        "temp": 88.66,
+        "feels_like": 85.64,
+        "temp_min": 88.66,
+        "temp_max": 88.66,
+        "pressure": 1010,
+        "humidity": 25,
+        "sea_level": 1010,
+        "grnd_level": 950
+    },
+    "visibility": 10000,
+    "wind": {
+        "speed": 3.24,
+        "deg": 346,
+        "gust": 3.71
+    },
+    "clouds": {
+        "all": 7
+    },
+    "dt": 1617427113,
+    "sys": {
+        "country": "IN",
+        "sunrise": 1617411423,
+        "sunset": 1617455902
+    },
+    "timezone": 19800,
+    "id": 1259229,
+    "name": "Pune",
+    "cod": 200
+}
+Request method:	GET
+Request URI:	http://api.openweathermap.org/data/2.5/weather?appid=7fe67bf08c80ded756e598d6f8fedaea&q=Pune&units=imperial
+Proxy:			<none>
+Request params:	<none>
+Query params:	appid=7fe67bf08c80ded756e598d6f8fedaea
+				q=Pune
+				units=imperial
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>
+HTTP/1.1 200 OK
+Server: openresty
+Date: Sat, 03 Apr 2021 05:23:57 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 489
+Connection: keep-alive
+X-Cache-Key: /data/2.5/weather?q=pune&units=imperial
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Credentials: true
+Access-Control-Allow-Methods: GET, POST
+
+{
+    "coord": {
+        "lon": 73.8553,
+        "lat": 18.5196
+    },
+    "weather": [
+        {
+            "id": 800,
+            "main": "Clear",
+            "description": "clear sky",
+            "icon": "01d"
+        }
+    ],
+    "base": "stations",
+    "main": {
+        "temp": 88.66,
+        "feels_like": 85.64,
+        "temp_min": 88.66,
+        "temp_max": 88.66,
+        "pressure": 1010,
+        "humidity": 25,
+        "sea_level": 1010,
+        "grnd_level": 950
+    },
+    "visibility": 10000,
+    "wind": {
+        "speed": 3.24,
+        "deg": 346,
+        "gust": 3.71
+    },
+    "clouds": {
+        "all": 7
+    },
+    "dt": 1617427113,
+    "sys": {
+        "country": "IN",
+        "sunrise": 1617411423,
+        "sunset": 1617455902
+    },
+    "timezone": 19800,
+    "id": 1259229,
+    "name": "Pune",
+    "cod": 200
+}
