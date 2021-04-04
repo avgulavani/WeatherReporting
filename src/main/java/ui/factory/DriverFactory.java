@@ -1,9 +1,13 @@
 package ui.factory;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 import java.util.function.Supplier;
 
 import org.openqa.selenium.WebDriver;
@@ -18,11 +22,16 @@ public class DriverFactory {
 	private static WebDriver driver;
 
 	private static final Supplier<WebDriver> chromeSupplier = () -> {	
-				
+		
 		ChromeOptions chromeOptions = new ChromeOptions();
 		DesiredCapabilities cap = DesiredCapabilities.chrome();
 
-		System.setProperty("webdriver.chrome.driver","/Users/a.vitthal.gulavani/Desktop/Personal_Data/personal_workspace/chromedriver-2");
+		try {
+			System.setProperty("webdriver.chrome.driver",getGlobalValue("chromebrowserpath"));
+		} catch (IOException e1) {
+		
+			e1.printStackTrace();
+		}
 		String host = "localhost";
 		
 			if (System.getProperty("HUB_HOST") != null) {
@@ -65,5 +74,17 @@ public class DriverFactory {
 		return MAP.get(browser).get();
 
 	}
+	
+	private static String getGlobalValue(String key) throws IOException {
+
+		String propertyfile = System.getProperty("user.dir") + File.separator + "project.properties";
+
+		Properties prop = new Properties();
+		FileInputStream fis = new FileInputStream(propertyfile);
+		prop.load(fis);
+		return prop.getProperty(key);
+
+	}
+
 
 }
