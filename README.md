@@ -5,8 +5,8 @@
 1. This code has been tested successfully on the following environment 
 
 	Os: Mac
-	Chrome browser version: 89.0.4389.114
-	Chrome driver version:89.0.4389.23
+	Chrome browser version : 89.0.4389.114
+	Chrome driver version :89.0.4389.23
 
 2. There are mainly three different xml files -
 	  uitestng.xml. -> UI testng file to test UI page
