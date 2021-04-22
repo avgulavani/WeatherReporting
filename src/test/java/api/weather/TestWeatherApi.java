@@ -19,10 +19,9 @@ public class TestWeatherApi extends SendRequest {
 			
 			return new Object[][]{
 				
-			//	{"Bhopal","imperial"}
-			//	{"Mumbai","imperial"},
-			//	{"Delhi","imperial"},
-			//	{"Srinagar","imperial"},
+				{"Mumbai","imperial"},
+				{"Delhi","imperial"},
+				{"Srinagar","imperial"},
 				{"Pune","imperial"}
 			};
 		}

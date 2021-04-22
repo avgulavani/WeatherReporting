@@ -5,52 +5,46 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
 
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class DriverFactory {
 	
-	private static WebDriver driver;
+	public static WebDriver driver;
 
 	private static final Supplier<WebDriver> chromeSupplier = () -> {	
 		
-		ChromeOptions chromeOptions = new ChromeOptions();
-		DesiredCapabilities cap = DesiredCapabilities.chrome();
-
-		try {
-			System.setProperty("webdriver.chrome.driver",getGlobalValue("chromebrowserpath"));
-		} catch (IOException e1) {
+		if (driver == null)
+		{
 		
-			e1.printStackTrace();
-		}
-		String host = "localhost";
-		
-			if (System.getProperty("HUB_HOST") != null) {
-				System.out.println("In Remote driver class");
-				host = System.getProperty("HUB_HOST");
-				String completeURL = "http://" + host + ":4444/wd/hub";
-				
-				try {
-					driver = new RemoteWebDriver(new URL(completeURL), cap);
-				} catch (MalformedURLException e) {
-				    
-					e.printStackTrace();
-				}
-				return driver = new ChromeDriver(chromeOptions);
+			/* local run */
+			try {
+				driver = createDriver();
+			} catch (IOException e) {
+			
+				e.printStackTrace();
 			}
-			else
-				return new ChromeDriver();
-	
-	};
+			
+			//	driver = setupDriver();
+			
+		}
+
+		return driver;
+
+		};
 	
 	private static final Supplier<WebDriver> firefoxSupplier = () -> {
 		
@@ -85,6 +79,60 @@ public class DriverFactory {
 		return prop.getProperty(key);
 
 	}
+	
+	public static WebDriver setupDriver() {
+
+		String host = "localhost";
+		DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+
+		if (System.getProperty("BROWSER") != null && System.getProperty("BROWSER").equalsIgnoreCase("firefox")) {
+			capabilities = DesiredCapabilities.firefox();
+
+		}
+		if (System.getProperty("HUB_HOST") != null) {
+			host = System.getProperty("HUB_HOST");
+
+		}
+		
+		String completeURL = "http://" + host + ":4444/wd/hub";
+		
+		try {
+			driver = new RemoteWebDriver(new URL(completeURL), capabilities);
+		} catch (MalformedURLException e) {
+		
+			e.printStackTrace();
+		}
+		return driver;
+	}
+	
+	
+	private static WebDriver createDriver() throws IOException {
+
+		ChromeOptions chromeOptions = new ChromeOptions();
+		System.setProperty("webdriver.chrome.driver",getGlobalValue("chromebrowserpath"));
+		DesiredCapabilities cap = DesiredCapabilities.chrome();
+		cap.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+		cap.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
+		chromeOptions.addArguments("start-maximized");
+		chromeOptions.addArguments("--always-authorize-plugins");
+		chromeOptions.setAcceptInsecureCerts(false);
+		chromeOptions.setExperimentalOption("useAutomationExtension", false);
+		chromeOptions.setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"));
+
+		chromeOptions.addArguments("--disable-gpu");
+		chromeOptions.addArguments("--disable-extensions");
+		chromeOptions.addArguments("--no-sandbox");
+		chromeOptions.addArguments("--disable-dev-shm-usage");
+		chromeOptions.addArguments("--disable-dev-shm-usage");
+		chromeOptions.addArguments("--window-size=1600,1200");
+
+		driver = new ChromeDriver(chromeOptions);
+		driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
+		Dimension d = new Dimension(1500, 2500);
+		driver.manage().window().setSize(d);
+		return driver;
+	}
+
 
 
 }

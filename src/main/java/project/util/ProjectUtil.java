@@ -14,6 +14,7 @@ import java.util.Map.Entry;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
@@ -157,4 +158,14 @@ public class ProjectUtil {
 		System.out.println("** result from util**" + result);
 		return result;
 	}
-}
+	
+
+
+        public static boolean areEqual(Map<Object, Object> apimap, Map<Object, Object> uimap) {
+        	
+        	return apimap.entrySet()
+            .stream()
+            .allMatch(e->e.getValue().equals(uimap.get(e.getValue())));
+        }
+	}
+

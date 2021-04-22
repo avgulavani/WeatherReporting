@@ -17,19 +17,5 @@ services:
       - hub
     environment:
       - HUB_HOST=hub
-  api-module:
-    image: avgulavani/weather-docker
-    container_name: api-module
-    depends_on:
-      - chrome
-      - firefox
-    environment:
-      - MODULE=uitestng.xml
-      - BROWSER=chrome
-      - SELENIUM_HUB=selenium-hub
-    volumes:
-      - ./weathertest-api-result:/usr/share/weathertest-api/test-output
-
-      
     volumes:
       - ./weather-test-result:/usr/share/weather/test-output
